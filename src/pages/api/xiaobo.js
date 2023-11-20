@@ -4,6 +4,10 @@ const OpenAI = require('openai')
 const apiKey = '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'
 const openai = new OpenAI({ apiKey })
 
+export const config = {
+  maxDuration: 30
+}
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     if (req.body && req.body.message && req.body.scents) {
