@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     if (req.body && req.body.message && req.body.scents) {
       let result = {}
-      let { message, scents } = req.body
+      let { message, scents, names } = req.body
 
       const chatCompletion = await openai.chat.completions.create({
         messages: [
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
           },
           {
             "role": "user",
-            "content": "假如说我告诉你6个通道的气味，按照顺序是 桂花、水蜜桃、草莓、天竺葵、薰衣草、苹果，然后我告诉你我的需求，你可以将其转换为我的程序可以理解的语言吗，返回函数名和参数"
+            "content": "假如说我告诉你6个通道的气味，按照顺序是 桂花、水蜜桃、草莓、天竺葵、薰衣草、苹果，另外我给这6个气味取了6种不同的产品名，分别是 桂花、人间水蜜桃、天真浪漫、天竺葵、紫色梦境、平平安安。然后我告诉你我的需求，你可以将其转换为我的程序可以理解的语言吗，返回函数名和参数"
           },
           {
             "role": "assistant",
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
           },
           {
             "role": "user",
-            "content": `我的设备6个气味是：${scents}。${message}。请将结果输出为 JSON 格式 {'code': '', 'description': '', 'remark': ''}，这样我方便获取`
+            "content": `我的设备气味胶囊是：${scents}，对应的产品名字是：${names}。${message}。请将结果输出为 JSON 格式 {'code': '', 'description': '', 'remark': ''}，这样我方便获取`
           }
         ],
         model: 'gpt-4',
@@ -67,7 +67,10 @@ export default async function handler(req, res) {
       if (chatCompletion && chatCompletion.choices && chatCompletion.choices.length) {
         const markdownText = chatCompletion.choices[0].message.content
         console.log(markdownText)
-        const jsonMatch = markdownText.match(/```(json|javascript|python)\n([\s\S]*?)\n```/)
+        const jsonMatch = markdownText.match(/```(json|javascript)\n([\s\S]*?)\n```/)
+
+        console.log(jsonMatch)
+        console.log('--------------')
 
         if (jsonMatch && jsonMatch.length) {
           const jsonString = jsonMatch[jsonMatch.length - 1]
