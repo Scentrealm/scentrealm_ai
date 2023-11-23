@@ -6,6 +6,28 @@ import styles from '@/styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  // let str = '{\'code\': \'mixedPlay([{"channelId": 1, "time": 20000}, {"channelId": 4, "time": 20000}, {"channelId": 6, "time": 20000}]);\',\'description\': \'正在为您混合播放“枕边蜜语”，“浓情可可”以及“精神满满”三种香氛，各自持续20秒。这三种香味的组合会让您感到新奇且轻松。\',\'remark\': \'为了达到最佳效果，我们建议您在空气流通的环境中使用。\'}';
+  //
+  // // let str = '{\'code\': \'mixedPlay([{"channelId": 1, "time": 20000}, {"channelId": 4, "time": 20000}, {"channelId": 6, "time": 20000}]);\',\'description\': \'正在为您混合播放“枕边蜜语”，“浓情可可”以及“精神满满”三种香氛，各自持续20秒。这三种香味的组合会让您感到新奇且轻松。\',\'remark\': \'为了达到最佳效果，我们建议您在空气流通的环境中使用。\'}';
+  //
+  // let replaced1 = str.replace(/'/g, '"')
+  //   .replace(/'code'/g, `"code"`)
+  //   .replace(/"channelId"/g, `'channelId'`)
+  //   .replace(/"time"/g, `'time'`);
+  // console.log(replaced1)
+  //
+  // function parseFlexibleJSON(jsonString) {
+  //   try {
+  //     return JSON.parse(jsonString);
+  //   } catch (e) {
+  //     let replaced = jsonString.replace(/'/g, '"');
+  //     // console.log(replaced)
+  //     // return JSON.parse(replaced);
+  //   }
+  // }
+  //
+  // console.log(parseFlexibleJSON(replaced1))
+
   return (
     <>
       <Head>

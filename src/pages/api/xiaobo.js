@@ -60,7 +60,7 @@ export default async function handler(req, res) {
           },
           {
             "role": "user",
-            "content": `我的设备气味胶囊是：${scents}，对应的产品名字是：${names}。${message}。请将结果输出为 JSON 格式 {'code': '', 'description': '', 'remark': ''}，这样我方便获取`
+            "content": `我的设备气味胶囊是：${scents}，对应的产品名字是：${names}。${message}。请将结果输出为 JSON 格式 {"code": "", "description": "", "remark": ""}，这样我方便获取`
           }
         ],
         model: 'gpt-4',
@@ -82,6 +82,11 @@ export default async function handler(req, res) {
           const jsonString = jsonMatch[jsonMatch.length - 1]
 
           try {
+            jsonString = jsonString
+              .replace(/'/g, '"')
+              .replace(/'code'/g, `"code"`)
+              .replace(/"channelId"/g, `'channelId'`)
+              .replace(/"time"/g, `'time'`)
             result = JSON.parse(jsonString)
           } catch (e) {
             result = null
