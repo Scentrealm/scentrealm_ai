@@ -75,7 +75,7 @@ export default async function handler(req, res) {
           jsonMatch = markdownText.match(/```\n([\s\S]*?)\n```/)
         }
 
-        console.log(jsonMatch)
+        console.log(markdownText)
         console.log('--------------')
         console.log(jsonMatch[jsonMatch.length - 1])
 
