@@ -77,7 +77,6 @@ export default async function handler(req, res) {
 
         console.log(markdownText)
         console.log('--------------')
-        console.log(jsonMatch[jsonMatch.length - 1])
 
         if (jsonMatch && jsonMatch.length) {
           const jsonString = jsonMatch[jsonMatch.length - 1]
@@ -88,6 +87,10 @@ export default async function handler(req, res) {
             result = null
             success = false
           }
+
+          console.log(jsonString)
+          console.log('--------------')
+          console.log(result)
         }
       }
 
