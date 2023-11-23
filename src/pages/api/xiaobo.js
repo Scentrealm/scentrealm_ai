@@ -69,34 +69,42 @@ export default async function handler(req, res) {
       if (chatCompletion && chatCompletion.choices && chatCompletion.choices.length) {
         const markdownText = chatCompletion.choices[0].message.content
 
-        if (markdownText.indexOf('```json') >= 0 || markdownText.indexOf('```javascript') >= 0) {
-          jsonMatch = markdownText.match(/```(json|javascript)\n([\s\S]*?)\n```/)
-        } else {
-          jsonMatch = markdownText.match(/```\n([\s\S]*?)\n```/)
-        }
+        // if (markdownText.indexOf('```json') >= 0 || markdownText.indexOf('```javascript') >= 0) {
+        //   jsonMatch = markdownText.match(/```(json|javascript)\n([\s\S]*?)\n```/)
+        // } else {
+        jsonMatch = markdownText.match(/```([\s\S]*?)```/)
+        // }
 
         console.log(markdownText)
         console.log('--------------')
-
         if (jsonMatch && jsonMatch.length) {
           let jsonString = jsonMatch[jsonMatch.length - 1]
+          let jsonIndex = jsonString.indexOf('{')
+          let jsonEndIndex = jsonString.lastIndexOf('}')
+          let resultStr = jsonString.substring(jsonIndex, jsonEndIndex + 1)
 
           try {
-            jsonString = jsonString
+            resultStr = resultStr
               .replace(/'/g, '"')
               .replace(/'code'/g, `"code"`)
               .replace(/"channelId"/g, `'channelId'`)
               .replace(/"time"/g, `'time'`)
-            result = JSON.parse(jsonString)
+            result = JSON.parse(resultStr)
           } catch (e) {
             result = null
             success = false
           }
 
-          console.log(jsonString)
+          console.log(resultStr)
           console.log('--------------')
           console.log(result)
+        } else {
+          result = null
+          success = false
         }
+      } else {
+        result = null
+        success = false
       }
 
       res.status(200).json({
