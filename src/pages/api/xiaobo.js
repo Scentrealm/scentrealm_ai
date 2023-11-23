@@ -89,6 +89,14 @@ export default async function handler(req, res) {
               .replace(/'code'/g, `"code"`)
               .replace(/"channelId"/g, `'channelId'`)
               .replace(/"time"/g, `'time'`)
+
+            // 匹配一些特殊情况
+            if (resultStr.indexOf('\"channelId\"') > 0) {
+              resultStr = resultStr.replace(/\"channelId\"/g, `'channelId'`)
+            }
+            if (resultStr.indexOf('\"time\"') > 0) {
+              resultStr = resultStr.replace(/\"time\"/g, `'time'`)
+            }
             result = JSON.parse(resultStr)
           } catch (e) {
             result = null
