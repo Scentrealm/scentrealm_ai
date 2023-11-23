@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     if (req.body && req.body.message && req.body.scents) {
       let result = {}
       let { message, scents, names } = req.body
+      let jsonMatch = []
 
       const chatCompletion = await openai.chat.completions.create({
         messages: [
@@ -66,8 +67,12 @@ export default async function handler(req, res) {
 
       if (chatCompletion && chatCompletion.choices && chatCompletion.choices.length) {
         const markdownText = chatCompletion.choices[0].message.content
-        console.log(markdownText)
-        const jsonMatch = markdownText.match(/```(json|javascript)\n([\s\S]*?)\n```/)
+
+        if (markdownText.indexOf('```json') >= 0 || markdownText.indexOf('```javascript') >= 0) {
+          jsonMatch = markdownText.match(/```(json|javascript)\n([\s\S]*?)\n```/)
+        } else {
+          jsonMatch = markdownText.match(/```\n([\s\S]*?)\n```/)
+        }
 
         console.log(jsonMatch)
         console.log('--------------')
