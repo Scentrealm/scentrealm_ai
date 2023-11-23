@@ -79,7 +79,7 @@ export default async function handler(req, res) {
         console.log('--------------')
 
         if (jsonMatch && jsonMatch.length) {
-          const jsonString = jsonMatch[jsonMatch.length - 1]
+          let jsonString = jsonMatch[jsonMatch.length - 1]
 
           try {
             jsonString = jsonString
