@@ -14,6 +14,7 @@ export default async function handler(req, res) {
       let result = {}
       let { message, scents, names } = req.body
       let jsonMatch = []
+      let success = true
 
       const chatCompletion = await openai.chat.completions.create({
         messages: [
@@ -76,6 +77,7 @@ export default async function handler(req, res) {
 
         console.log(jsonMatch)
         console.log('--------------')
+        console.log(jsonMatch[jsonMatch.length - 1])
 
         if (jsonMatch && jsonMatch.length) {
           const jsonString = jsonMatch[jsonMatch.length - 1]
@@ -84,13 +86,14 @@ export default async function handler(req, res) {
             result = JSON.parse(jsonString)
           } catch (e) {
             result = null
+            success = false
           }
         }
       }
 
       res.status(200).json({
         code: 200,
-        success: true,
+        success: success,
         data: {
           ...result
         }
