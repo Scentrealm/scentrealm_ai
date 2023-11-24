@@ -79,8 +79,6 @@ export default async function handler(req, res) {
 
         jsonMatch = markdownText.match(/```([\s\S]*?)```/)
 
-        console.log(markdownText)
-        console.log('--------------')
         if (jsonMatch && jsonMatch.length) {
           let jsonString = jsonMatch[jsonMatch.length - 1]
           let jsonIndex = jsonString.indexOf('{')
@@ -103,11 +101,22 @@ export default async function handler(req, res) {
             if (resultStr.indexOf('\"time\"') > 0) {
               resultStr = resultStr.replace(/\"time\"/g, `'time'`)
             }
+
             try {
               result = JSON.parse(resultStr)
-            } catch () {
-              result = null
+            } catch (e) {
               success = false
+              result = null
+            } finally {}
+          }
+
+          // 替换 “香氛” 为 “气味”
+          if (result) {
+            if (result.description) {
+              result.description = result.description.replace(/香氛/g, '气味')
+            }
+            if (result.remark) {
+              result.remark = result.remark.replace(/香氛/g, '气味')
             }
           }
 
@@ -115,16 +124,20 @@ export default async function handler(req, res) {
           console.log('--------------')
           console.log(result)
         } else {
-          result = null
-          success = false
+          success = true
+          result = {
+            code: '',
+            remark: '',
+            description: markdownText
+          }
         }
       } else {
+        success = true
         result = {
           code: ``,
           remark: '',
           description: markdownText
         }
-        success = true
       }
 
       res.status(200).json({
