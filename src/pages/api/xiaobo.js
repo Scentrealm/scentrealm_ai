@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const OpenAI = require('openai')
+const util = require('./util')
 const apiKey = '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'
 const openai = new OpenAI({ apiKey })
 
@@ -84,53 +85,35 @@ export default async function handler(req, res) {
           let jsonIndex = jsonString.indexOf('{')
           let jsonEndIndex = jsonString.lastIndexOf('}')
           let resultStr = jsonString.substring(jsonIndex, jsonEndIndex + 1)
+          let obj = util.formatJSON(resultStr)
 
-          try {
-            result = JSON.parse(resultStr)
-          } catch (e) {
-            resultStr = resultStr
-              .replace(/'/g, '"')
-              .replace(/'code'/g, `"code"`)
-              .replace(/"channelId"/g, `'channelId'`)
-              .replace(/"time"/g, `'time'`)
-
-            // 匹配一些特殊情况
-            if (resultStr.indexOf('\"channelId\"') > 0) {
-              resultStr = resultStr.replace(/\"channelId\"/g, `'channelId'`)
-            }
-            if (resultStr.indexOf('\"time\"') > 0) {
-              resultStr = resultStr.replace(/\"time\"/g, `'time'`)
-            }
-
-            try {
-              result = JSON.parse(resultStr)
-            } catch (e) {
-              success = false
-              result = null
-            } finally {}
-          }
-
-          // 替换 “香氛” 为 “气味”
-          if (result) {
-            if (result.description) {
-              result.description = result.description.replace(/香氛/g, '气味')
-            }
-            if (result.remark) {
-              result.remark = result.remark.replace(/香氛/g, '气味')
-            }
-          }
+          result = obj.result
+          success = obj.success
 
           console.log(resultStr)
-          console.log('--------------')
-          console.log(result)
         } else {
-          success = true
-          result = {
-            code: '',
-            remark: '',
-            description: markdownText
+          jsonMatch = markdownText.match(/{([\s\S]*?)}/);
+
+          if (jsonMatch && jsonMatch.length) {
+            let resultStr = `{${jsonMatch[jsonMatch.length - 1]}}`
+            let obj = util.formatJSON(resultStr)
+
+            result = obj.result
+            success = obj.success
+
+            console.log(resultStr)
+          } else {
+            success = true
+            result = {
+              code: '',
+              remark: '',
+              description: markdownText
+            }
           }
         }
+
+        console.log('--------------')
+        console.log(result)
       } else {
         success = true
         result = {
