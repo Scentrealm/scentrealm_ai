@@ -10,11 +10,15 @@ export default function Home() {
 
   let response = '明白了，根据你的设备香氛胶囊改变，我们现在将选择播放薄荷香氛，因为薄荷气味通常可以使人感到精神饱满。这是 JSON 格式的输出结果：``` json{"code": "mixedPlay([{\'channelId\': 6, \'time\': 60000}])","description": "精神满满","remark": "正在为您播放精神满满的薄荷香氛，持续时间60秒，以帮助提神驾驶。"}```这样，声音播报就可以根据描叙remark字段，来给予用户适当的信息反馈。';
 
-  console.log(response)
+  let newStr = `{"code": "mixedPlay([{'channelId': 6, 'time': 60000}]);","description": "正在播放薰衣草香氛，持续时间60秒，以帮助您放松心情。","remark": "该气味的产品名为'人间浪漫'"}`
+
+  console.log(newStr)
+  console.log(JSON.parse(newStr))
+
 
   let jsonMatch = response.match(/```([\s\S]*?)```/)
 
-  console.log(jsonMatch)
+  // console.log(jsonMatch)
 
   // console.log(str)
   let strIndex = str.indexOf('{')

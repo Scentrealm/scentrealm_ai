@@ -15,6 +15,11 @@ export default async function handler(req, res) {
       let { message, scents, names } = req.body
       let jsonMatch = []
       let success = true
+      let isScentQuestion = false
+
+      if (message.indexOf('气味') >= 0 || message.indexOf('香氛') >= 0 || message.indexOf('香味') >= 0) {
+        isScentQuestion = true
+      }
 
       const chatCompletion = await openai.chat.completions.create({
         messages: [
@@ -52,15 +57,18 @@ export default async function handler(req, res) {
           },
           {
             "role": "user",
-            "content": "可以将输出结果简化一些吗，因为我想把你输出的结果转化为音频，表示对用户的一个回应，因此我只需要2个信息： 1. 函数的代码。 2. 你对这个结果的一些描述。 我会把你的描述当做一个音频告知用户"
+            "content": "可以将输出结果简化一些吗，因为我想把你输出的结果转化为音频，表示对用户的一个回应，因此我只需要2个信息： 1. 函数的代码。 2. 你对这个结果的一些描述和解释。 我会把你的描述和解释当做一个音频告知用户"
           },
           {
             "role": "assistant",
             "content": "当然可以。以下是简化后的输出结果：1. **函数代码**:```javascript mixedPlay([{\"channelId\": 5, \"time\": 60000}]);```2. **描述**:\"正在播放薰衣草香氛，持续时间60秒，以帮助您提神。\""
           },
-          {
+          isScentQuestion ? {
             "role": "user",
             "content": `我的设备气味胶囊是：${scents}，对应的产品名字是：${names}。${message}。请将结果输出为 JSON 格式 {"code": "", "description": "", "remark": ""}，这样我方便获取`
+          } : {
+            "role": "user",
+            "content": message
           }
         ],
         model: 'gpt-4',
@@ -69,11 +77,7 @@ export default async function handler(req, res) {
       if (chatCompletion && chatCompletion.choices && chatCompletion.choices.length) {
         const markdownText = chatCompletion.choices[0].message.content
 
-        // if (markdownText.indexOf('```json') >= 0 || markdownText.indexOf('```javascript') >= 0) {
-        //   jsonMatch = markdownText.match(/```(json|javascript)\n([\s\S]*?)\n```/)
-        // } else {
         jsonMatch = markdownText.match(/```([\s\S]*?)```/)
-        // }
 
         console.log(markdownText)
         console.log('--------------')
@@ -84,6 +88,8 @@ export default async function handler(req, res) {
           let resultStr = jsonString.substring(jsonIndex, jsonEndIndex + 1)
 
           try {
+            result = JSON.parse(resultStr)
+          } catch (e) {
             resultStr = resultStr
               .replace(/'/g, '"')
               .replace(/'code'/g, `"code"`)
@@ -97,10 +103,12 @@ export default async function handler(req, res) {
             if (resultStr.indexOf('\"time\"') > 0) {
               resultStr = resultStr.replace(/\"time\"/g, `'time'`)
             }
-            result = JSON.parse(resultStr)
-          } catch (e) {
-            result = null
-            success = false
+            try {
+              result = JSON.parse(resultStr)
+            } catch () {
+              result = null
+              success = false
+            }
           }
 
           console.log(resultStr)
@@ -111,8 +119,12 @@ export default async function handler(req, res) {
           success = false
         }
       } else {
-        result = null
-        success = false
+        result = {
+          code: ``,
+          remark: '',
+          description: markdownText
+        }
+        success = true
       }
 
       res.status(200).json({
