@@ -22,6 +22,11 @@ export default async function handler(req, res) {
         isScentQuestion = true
       }
 
+      console.log('message:------------')
+      console.log(message)
+      console.log(scents)
+      console.log(names)
+
       const chatCompletion = await openai.chat.completions.create({
         messages: [
           {
@@ -92,7 +97,7 @@ export default async function handler(req, res) {
 
           console.log(resultStr)
         } else {
-          jsonMatch = markdownText.match(/{([\s\S]*?)}/);
+          jsonMatch = markdownText.match(/{([\s\S]*?)}/)
 
           if (jsonMatch && jsonMatch.length) {
             let resultStr = `{${jsonMatch[jsonMatch.length - 1]}}`
@@ -100,8 +105,6 @@ export default async function handler(req, res) {
 
             result = obj.result
             success = obj.success
-
-            console.log(resultStr)
           } else {
             success = true
             result = {
@@ -111,9 +114,6 @@ export default async function handler(req, res) {
             }
           }
         }
-
-        console.log('--------------')
-        console.log(result)
       } else {
         success = true
         result = {
@@ -122,6 +122,9 @@ export default async function handler(req, res) {
           description: markdownText
         }
       }
+
+      console.log('result:--------------')
+      console.log(result)
 
       res.status(200).json({
         code: 200,
