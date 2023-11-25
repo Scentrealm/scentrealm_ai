@@ -124,7 +124,13 @@ export default async function handler(req, res) {
       }
 
       console.log('result:--------------')
-      console.log(result)
+      console.log({
+        code: 200,
+        success: success,
+        data: {
+          ...result
+        }
+      })
 
       res.status(200).json({
         code: 200,
