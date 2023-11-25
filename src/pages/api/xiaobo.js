@@ -16,10 +16,10 @@ export default async function handler(req, res) {
       let { message, scents, names } = req.body
       let jsonMatch = []
       let success = true
-      let isScentQuestion = false
+      let isScentQuestion = true
 
       if (message.indexOf('气味') >= 0 || message.indexOf('香氛') >= 0 || message.indexOf('香味') >= 0) {
-        isScentQuestion = true
+        // isScentQuestion = true
       }
 
       console.log('message:------------')
