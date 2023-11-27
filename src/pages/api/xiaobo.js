@@ -18,9 +18,9 @@ export default async function handler(req, res) {
       let success = true
       let isScentQuestion = true
 
-      if (message.indexOf('气味') >= 0 || message.indexOf('香氛') >= 0 || message.indexOf('香味') >= 0) {
-        // isScentQuestion = true
-      }
+      // if (message.indexOf('气味') >= 0 || message.indexOf('香氛') >= 0 || message.indexOf('香味') >= 0) {
+      //   isScentQuestion = true
+      // }
 
       console.log('message:------------')
       console.log(message)
@@ -82,6 +82,8 @@ export default async function handler(req, res) {
 
       if (chatCompletion && chatCompletion.choices && chatCompletion.choices.length) {
         const markdownText = chatCompletion.choices[0].message.content
+        console.log('response:------------')
+        console.log(markdownText)
 
         jsonMatch = markdownText.match(/```([\s\S]*?)```/)
 
@@ -115,11 +117,11 @@ export default async function handler(req, res) {
           }
         }
       } else {
-        success = true
+        success = false
         result = {
           code: ``,
           remark: '',
-          description: markdownText
+          description: ''
         }
       }
 
