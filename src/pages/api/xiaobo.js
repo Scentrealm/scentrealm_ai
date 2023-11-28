@@ -1,8 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 const OpenAI = require('openai')
 const util = require('./util')
-const apiKey = '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'
+const apiKey = process.env.OPENAI_KEY
 const openai = new OpenAI({ apiKey })
 
 export const config = {
@@ -17,10 +15,6 @@ export default async function handler(req, res) {
       let jsonMatch = []
       let success = true
       let isScentQuestion = true
-
-      // if (message.indexOf('气味') >= 0 || message.indexOf('香氛') >= 0 || message.indexOf('香味') >= 0) {
-      //   isScentQuestion = true
-      // }
 
       console.log('message:------------')
       console.log(message)

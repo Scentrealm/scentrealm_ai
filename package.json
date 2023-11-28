@@ -12,7 +12,8 @@
     "next": "14.0.3",
     "openai": "^4.19.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tencentcloud-sdk-nodejs": "^4.0.745"
   },
   "devDependencies": {
     "eslint": "^8",
