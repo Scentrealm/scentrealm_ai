@@ -4,7 +4,7 @@ const apiKey = process.env.OPENAI_KEY
 const openai = new OpenAI({ apiKey })
 
 export const config = {
-  maxDuration: 30
+  maxDuration: 40
 }
 
 export default async function handler(req, res) {
