@@ -1,7 +1,7 @@
 const OpenAI = require('openai')
 const util = require('./util')
 // const apiKey = process.env.OPENAI_KEY
-const apiKey = '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'
+const apiKey = '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'
 const openai = new OpenAI({ apiKey })
 
 export const config = {
