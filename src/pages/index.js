@@ -6,12 +6,12 @@ import styles from '@/styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  let str = '男士通常喜欢清新的味道，其中咖啡、玫瑰和薄荷都是不错的选择。这里我们选择薄荷气味，清新同时也有提神醒脑的效果。以下是对应的函数调用和JSON格式的输出结果：{"code": "mixedPlay([{\"channelId\": 6, \"time\": 60000}]);","description": "正在播放薄荷香氛，持续时间60秒，以帮助您保持清新和精神饱满。","remark": "这是一款男士喜欢的香氛，非常清新也适用于工作和驾驶。"}';
+  let str = `确实，您对应的香氛胶囊和产品名字都与杭州的特色紧密相关。当我们谈到杭州，龙井茶和荷花是几乎立即浮现在脑海中的图像。下面的代码会将这两种香氛同时播放，模拟一个您所描述的 "杭州乐园”的气氛。\n{\n"code": "mixedPlay([{'channelId': 1, 'time': 60000}, {'channelId': 4, 'time': 60000}]);",\n"description": "正在播放 '荷花' 和 '龙井' 的香氛，每种各持续60秒。",\n"remark": "这将创造出一种仿佛身在杭州的气氛。"\n}`;
 
-
+  // console.log(str);
   let jsonMatch = str.match(/{([\s\S]*?)\"}/)
 
-  console.log(jsonMatch[jsonMatch.length - 1])
+  console.log(jsonMatch)
   let strIndex = str.indexOf('{')
   let endIndex = str.lastIndexOf('}')
 
