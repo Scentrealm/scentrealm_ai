@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useEffect } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +15,18 @@ export default function Home() {
   console.log(jsonMatch)
   let strIndex = str.indexOf('{')
   let endIndex = str.lastIndexOf('}')
+
+  // useEffect(() => {
+  //   const eventSource = new EventSource('/api/sse');
+  //
+  //   eventSource.addEventListener('chat', (event) => {
+  //     console.log(event.data);
+  //   });
+  //
+  //   return () => {
+  //     eventSource.close();
+  //   }
+  // }, [])
 
   return (
     <>

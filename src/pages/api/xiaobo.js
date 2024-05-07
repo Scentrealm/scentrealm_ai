@@ -1,10 +1,16 @@
 const OpenAI = require('openai')
 const util = require('./util')
-const apiKey = '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'
-const openai = new OpenAI({ apiKey })
+
+// const apiKey = process.env.OPENAI_KEY
+const apiKey = 'sk-MUXQL6e4bkbbKfR90bF33d281cBc442bAe863a42DeE2524d'
+const baseURL = 'https://gtapi.xiaoerchaoren.com:8932/v1'
+const openai = new OpenAI({
+  apiKey,
+  baseURL
+})
 
 export const config = {
-  maxDuration: 40
+  maxDuration: 20
 }
 
 /*
@@ -19,7 +25,7 @@ export default async function handler(req, res) {
       let success = true
       let isScentQuestion = true
       let originalContent = ''
-      let promptArray = [];
+      let promptArray = []
 
       console.log('message:------------')
       console.log(message)
