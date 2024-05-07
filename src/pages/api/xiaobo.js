@@ -2,12 +2,9 @@ const OpenAI = require('openai')
 const util = require('./util')
 
 // const apiKey = process.env.OPENAI_KEY
-const apiKey = 'sk-MUXQL6e4bkbbKfR90bF33d281cBc442bAe863a42DeE2524d'
-const baseURL = 'https://gtapi.xiaoerchaoren.com:8932/v1'
-const openai = new OpenAI({
-  apiKey,
-  baseURL
-})
+const apiKey = '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'
+// const baseURL = 'https://gtapi.xiaoerchaoren.com:8932/v1'
+const openai = new OpenAI({ apiKey })
 
 export const config = {
   maxDuration: 20
