@@ -59,35 +59,35 @@ export default async function handler(req, res) {
         "img": "",
         "color": "#A9DAD7",
         "period": 180000
-      }
+      },
       {
         "no": 1530,
         "name": "茉香旅途",
         "img": "",
         "color": "#A9DAD7",
         "period": 225000
-      }
+      },
       {
         "no": 1531,
         "name": "薰衣仲夜",
         "img": "",
         "color": "#A9DAD7",
         "period": 180000
-      }
+      },
       {
         "no": 1532,
         "name": "小曹寻味",
         "img": "",
         "color": "#A9DAD7",
         "period": 120000
-      }
+      },
       {
         "no": 1533,
         "name": "晨曦薄荷",
         "img": "",
         "color": "#A9DAD7",
         "period": 180000
-      }
+      },
       {
         "no": 1534,
         "name": "西湖桂花",
