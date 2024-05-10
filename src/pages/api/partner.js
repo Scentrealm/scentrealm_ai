@@ -3,6 +3,12 @@ export default async function handler(req, res) {
     code: 200,
     msg: 'success',
     success: true,
+    page: {
+      total: 13,
+      current_page: 1,
+      last_page: 1,
+      n: 2000
+    },
     data: [
       {
         "no": 345,
