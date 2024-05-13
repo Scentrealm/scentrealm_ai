@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         "name": "大王来巡山",
         "img": "/scents/xiaoshanpo.png",
         "color": "#A9DAD7",
-        "period": 288000
+        "period": 123000
       },
       {
         "no": 561,
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         "name": "加州阳光",
         "img": "/scents/chenlu.png",
         "color": "#A9DAD7",
-        "period": 180000
+        "period": 87000
       },
       {
         "no": 665,
