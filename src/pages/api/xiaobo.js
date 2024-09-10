@@ -2,6 +2,7 @@ const OpenAI = require('openai')
 const util = require('./util')
 
 const apiKey = process.env.OPENAI_KEY
+const apiKey = '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'
 // const baseURL = 'https://gtapi.xiaoerchaoren.com:8932/v1'
 const openai = new OpenAI({ apiKey })
 

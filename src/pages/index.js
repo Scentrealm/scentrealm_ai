@@ -4,17 +4,67 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useEffect } from 'react'
 
+const formatJSON = (resultStr) => {
+  let result = {}
+  let success = true
+
+  try {
+    result = JSON.parse(resultStr)
+  } catch (e) {
+    console.log('-----', e)
+    resultStr = resultStr
+      .replace(/'/g, '"')
+      .replace(/'code'/g, `"code"`)
+      .replace(/"channelId"/g, `'channelId'`)
+      .replace(/"time"/g, `'time'`)
+
+    // 匹配一些特殊情况
+    if (resultStr.indexOf('\"channelId\"') > 0) {
+      resultStr = resultStr.replace(/\"channelId\"/g, `'channelId'`)
+    }
+    if (resultStr.indexOf('\"time\"') > 0) {
+      resultStr = resultStr.replace(/\"time\"/g, `'time'`)
+    }
+
+    try {
+      result = JSON.parse(resultStr)
+    } catch (e) {
+      success = false
+      result = null
+    } finally {}
+  }
+
+  // 替换 “香氛” 为 “气味”
+  if (result) {
+    if (result.description) {
+      result.description = result.description.replace(/香氛/g, '气味')
+    }
+    if (result.remark) {
+      result.remark = result.remark.replace(/香氛/g, '气味')
+    }
+  }
+
+  return { result, success }
+}
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  let str = `确实，您对应的香氛胶囊和产品名字都与杭州的特色紧密相关。当我们谈到杭州，龙井茶和荷花是几乎立即浮现在脑海中的图像。下面的代码会将这两种香氛同时播放，模拟一个您所描述的 "杭州乐园”的气氛。\n{\n"code": "mixedPlay([{'channelId': 1, 'time': 60000}, {'channelId': 4, 'time': 60000}]);",\n"description": "正在播放 '荷花' 和 '龙井' 的香氛，每种各持续60秒。",\n"remark": "这将创造出一种仿佛身在杭州的气氛。"\n}`;
+  let str = `{
+  "code": "mixedPlay([{'channelId': 3, 'time': 60000}, {'channelId': 5, 'time': 60000}]);",
+  "description": "播放檀香和广藿香气味，每种香气播放60秒。",
+  "remark": "这种配方有助于舒缓您的压力，希望您能够放松下来。
+  }`;
 
-  // console.log(str);
-  let jsonMatch = str.match(/{([\s\S]*?)\"}/)
+    console.log(str)
+    console.log(formatJSON(str))
 
-  console.log(jsonMatch)
-  let strIndex = str.indexOf('{')
-  let endIndex = str.lastIndexOf('}')
+  // // console.log(str);
+  // let jsonMatch = str.match(/{([\s\S]*?)\"}/)
+  //
+  // console.log(jsonMatch)
+  // let strIndex = str.indexOf('{')
+  // let endIndex = str.lastIndexOf('}')
 
   // useEffect(() => {
   //   const eventSource = new EventSource('/api/sse');
