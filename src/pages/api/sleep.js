@@ -6,19 +6,19 @@ export default async function handler(req, res) {
     success: true,
     data: {
       device: [
-        '34:94:54:2b:e2:c2',
-        'd4:d4:da:55:5b:aa',
-        'd4:d4:da:54:50:da',
-        'd4:d4:da:43:33:22',
-        'd4:d4:da:53:9d:02',
-        'd4:d4:da:59:60:b2',
-        '34:94:54:2c:b5:12',
-        '34:94:54:2c:b4:f6',
-        '34:94:54:2b:e1:f6',
-        'd4:d4:da:53:aa:6e',
-        '08:d1:f9:12:8c:22',
-        '08:d1:f9:12:89:36',
-        '78:e3:6d:08:b5:ae',
+        'scent3494542be2c2',
+        'scentd4d4da555baa',
+        'scentd4d4da5450da',
+        'scentd4d4da433322',
+        'scentd4d4da539d02',
+        'scentd4d4da5960b2',
+        'scent3494542cb512',
+        'scent3494542cb4f6',
+        'scent3494542be1f6',
+        'scentd4d4da53aa6e',
+        'scent08d1f9128c22',
+        'scent08d1f9128936',
+        'scent78e36d08b5ae',
       ]
     }
   })
