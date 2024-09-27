@@ -1,3 +1,4 @@
+//  时光机扫码加群
 export default async function handler(req, res) {
   res.status(200).json({
     code: 200,
@@ -6,7 +7,7 @@ export default async function handler(req, res) {
     data: {
       img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1725951374254-WechatIMG12.jpg',
       device: [
-        '10115', 
+        '10115',
         '10096',
         '10078',
         '10075',
