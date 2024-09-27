@@ -18,6 +18,7 @@ export default async function handler(req, res) {
         'd4:d4:da:53:aa:6e',
         '08:d1:f9:12:8c:22',
         '08:d1:f9:12:89:36',
+        '78:e3:6d:08:b5:ae',
       ]
     }
   })
