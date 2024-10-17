@@ -14,7 +14,8 @@
     "openai": "^4.19.0",
     "react": "^18",
     "react-dom": "^18",
-    "tencentcloud-sdk-nodejs": "^4.0.745"
+    "tencentcloud-sdk-nodejs": "^4.0.745",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "eslint": "^8",
