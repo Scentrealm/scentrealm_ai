@@ -29,7 +29,7 @@ export default function Chat() {
 
   return (
     <div>
-      <h1>实时聊天</h1>
+      <h1>Send command</h1>
       <div>
         {messages.map((msg, index) => (
           <div key={index}>{msg}</div>
