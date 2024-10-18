@@ -1,35 +1,26 @@
 import { useEffect, useState } from 'react';
 
 export default function HomePage() {
-  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  let socket;
+  let subscribeSocket;
+  let sendSocket;
 
   useEffect(() => {
     // 初始化 WebSocket 客户端连接
-    socket = new WebSocket('wss://ai.qiweiwangguo.com/api/socket');
+    sendSocket = new WebSocket('ws://114.55.232.109:8765/message/send/zhanhui');
 
-    socket.onopen = () => {
-      console.log('Connected to WebSocket server');
-    };
+    console.log('///')
 
-    socket.onmessage = (event) => {
-      console.log('Message from server:', event.data);
-      setMessages((prev) => [...prev, event.data]);
-    };
-
-    socket.onclose = () => {
-      console.log('WebSocket connection closed');
-    };
-
-    return () => {
-      socket.close();
-    };
+    // return () => {
+    //   sendSocket.close();
+    // };
   }, []);
 
   const sendMessage = () => {
-    if (socket && input) {
-      socket.send(input);
+    console.log(sendSocket, input, '/////')
+    if (sendSocket && input) {
+      console.log(input);
+      sendSocket.send(input);
       setInput('');
     }
   };
@@ -37,11 +28,6 @@ export default function HomePage() {
   return (
     <div>
       <h1>WebSocket Chat</h1>
-      <div>
-        {messages.map((msg, index) => (
-          <div key={index}>{msg}</div>
-        ))}
-      </div>
       <input
         type="text"
         value={input}

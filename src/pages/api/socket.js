@@ -1,33 +1,22 @@
-// /pages/api/socket.js
-
-import { Server } from 'ws';
+import { Server } from "socket.io";
 
 export default function handler(req, res) {
-  if (res.socket.server.wss) {
-    console.log('WebSocket Server already running');
-    res.end();
-    return;
+  if (!res.socket.server.io) {
+    console.log('正在启动 socket.io 服务器...');
+    const io = new Server(res.socket.server);
+    res.socket.server.io = io;
+
+    io.on('connection', (socket) => {
+      console.log('用户连接', socket.id);
+
+      socket.on('message', (msg) => {
+        socket.broadcast.emit('message', msg); // 将消息发送给所有人，除了发送者
+      });
+
+      socket.on('disconnect', () => {
+        console.log('用户断开连接', socket.id);
+      });
+    });
   }
-
-  console.log('Initializing WebSocket Server');
-  const wss = new Server({ server: res.socket.server });
-
-  // 监听客户端连接
-  wss.on('connection', (ws) => {
-    console.log('New client connected');
-
-    // 监听客户端消息
-    ws.on('message', (message) => {
-      console.log('Received:', message);
-      // 给客户端发送回执消息
-      ws.send(`Server received: ${message}`);
-    });
-
-    ws.on('close', () => {
-      console.log('Client disconnected');
-    });
-  });
-
-  res.socket.server.wss = wss;
   res.end();
 }
