@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     success: true,
     data: {
       // img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1725951374254-WechatIMG12.jpg',
-      img: 'https://res.xiaobo.qiweiwangguo.com/images/20250103/46251735886455250103.png',
+      img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1735886891742-WX20250103-143824%402x.png',
       device: [
         '10115',
         '10096',
