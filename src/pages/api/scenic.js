@@ -7,7 +7,8 @@ export default async function handler(req, res) {
     data: {
       // img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1725951374254-WechatIMG12.jpg',
       // img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1735886891742-WX20250103-143824%402x.png',
-      img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1737689427908-WechatIMG14.jpg',
+      // img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1737689427908-WechatIMG14.jpg',
+      img: 'https://scenic-qiweiwangguo-com.oss-cn-hangzhou.aliyuncs.com/uploads/web/image/1738813045037-WechatIMG19.jpg',
       device: [
         '10115',
         '10096',
