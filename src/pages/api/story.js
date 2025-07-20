@@ -15,7 +15,7 @@ export const config = {
  */
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    if (req.body && req.body.message && req.body.scents) {
+    if (req.body && req.body.message) {
       let result = {}
       let { message } = req.body
       let jsonMatch = []
