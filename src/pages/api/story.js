@@ -1,9 +1,9 @@
 const OpenAI = require('openai')
 const util = require('./util')
 
-const apiKey = process.env.OPENAI_KEY
-// const apiKey = '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'
-// const baseURL = 'https://gtapi.xiaoerchaoren.com:8932/v1'
+// const apiKey = process.env.OPENAI_KEY
+const apiKey = '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'
+const baseURL = 'https://gtapi.xiaoerchaoren.com:8932/v1'
 const openai = new OpenAI({ apiKey })
 
 export const config = {
@@ -38,6 +38,8 @@ export default async function handler(req, res) {
         messages: promptArray,
         model: 'gpt-4',
       })
+
+      console.log(chatCompletion)
 
       if (chatCompletion && chatCompletion.choices && chatCompletion.choices.length) {
         const markdownText = chatCompletion.choices[0].message.content
