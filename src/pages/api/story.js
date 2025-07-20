@@ -58,7 +58,7 @@ export default async function handler(req, res) {
         code: 200,
         success: success,
         data: {
-          ...result
+          result
         }
       })
 
