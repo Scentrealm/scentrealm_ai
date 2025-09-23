@@ -105,7 +105,7 @@ export default async function handler(req, res) {
       },
       {
         "id": 10,
-        "title": "环游世界做苹果派",
+        "title": "少儿故事",
         "img_url": "https://res.xiaobo.qiweiwangguo.com/images/20250922/91591758513472250922.png",
         "video_url": "https://res.xiaobo.qiweiwangguo.com/audios/20250923/550320250923_少儿故事.MP3",
         "srt": "[{\"end_time\":\"00:00:32,300\",\"id\":762,\"start_time\":\"00:00:15,400\"},{\"end_time\":\"00:00:54,000\",\"id\":1180,\"start_time\":\"00:00:35,633\"},{\"end_time\":\"00:01:11,266\",\"id\":811,\"start_time\":\"00:00:55,233\"},{\"end_time\":\"00:01:38,966\",\"id\":1663,\"start_time\":\"00:01:13,266\"},{\"end_time\":\"00:01:59,800\",\"id\":812,\"start_time\":\"00:01:39,333\"},{\"end_time\":\"00:02:21,700\",\"id\":45,\"start_time\":\"00:02:00,800\"},{\"end_time\":\"00:02:45,700\",\"id\":787,\"start_time\":\"00:02:22,800\"}]",
