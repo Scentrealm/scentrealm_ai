@@ -334,6 +334,160 @@ export default async function handler(req, res) {
             "is_show": "1",
             "created_at": "2025-11-18 20:53:38"
         },
+        {
+            "id": 31,
+            "title": "\u6700\u597d\u7684\u9762\u5305\u5e97",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/621120260107_\u6700\u597d\u7684\u9762\u5305\u5e97.mp3",
+            "srt": "[{\"end_time\":\"00:00:14,023\",\"id\":810,\"start_time\":\"00:00:10,141\"},{\"end_time\":\"00:01:05,023\",\"id\":528,\"start_time\":\"00:00:48,141\"},{\"end_time\":\"00:02:04,023\",\"id\":528,\"start_time\":\"00:01:50,141\"},{\"end_time\":\"00:05:12,023\",\"id\":810,\"start_time\":\"00:04:58,141\"},{\"end_time\":\"00:07:49,023\",\"id\":810,\"start_time\":\"00:07:40,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 23:24:32"
+        },
+        {
+            "id": 32,
+            "title": "\u6311\u98df\u7684\u5f17\u96f7\u8fbe",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/495620260107_\u6311\u98df\u7684\u5f17\u96f7\u8fbe.mp3",
+            "srt": "[{\"end_time\":\"00:01:12,023\",\"id\":824,\"start_time\":\"00:01:06,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 23:24:14"
+        },
+        {
+            "id": 33,
+            "title": "\u4e03\u4e2a\u8d2a\u5403\u5c0f\u5b9d\u8d1d",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/905020260107_\u4e03\u4e2a\u8d2a\u5403\u5c0f\u5b9d\u8d1d.mp3",
+            "srt": "[{\"end_time\":\"00:00:47,023\",\"id\":129,\"start_time\":\"00:00:35,141\"},{\"end_time\":\"00:01:52,023\",\"id\":3,\"start_time\":\"00:01:41,141\"},{\"end_time\":\"00:02:07,023\",\"id\":3,\"start_time\":\"00:02:01,141\"},{\"end_time\":\"00:03:43,023\",\"id\":810,\"start_time\":\"00:02:38,141\"},{\"end_time\":\"00:04:08,023\",\"id\":528,\"start_time\":\"00:03:56,141\"},{\"end_time\":\"00:09:30,023\",\"id\":906,\"start_time\":\"00:09:21,141\"},{\"end_time\":\"00:09:53,023\",\"id\":906,\"start_time\":\"00:09:44,141\"},{\"end_time\":\"00:11:12,023\",\"id\":906,\"start_time\":\"00:11:02,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 23:23:46"
+        },
+        {
+            "id": 34,
+            "title": "\u556a\uff01\u852c\u83dc\u5370\u7ae0\u753b",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/235820260107_\u556a\uff01\u852c\u83dc\u5370\u7ae0\u753b.mp3",
+            "srt": "[{\"end_time\":\"00:00:16,023\",\"id\":601,\"start_time\":\"00:00:10,141\"},{\"end_time\":\"00:01:56,023\",\"id\":537,\"start_time\":\"00:01:51,141\"},{\"end_time\":\"00:04:12,023\",\"id\":1585,\"start_time\":\"00:04:00,141\"},{\"end_time\":\"00:04:49,023\",\"id\":601,\"start_time\":\"00:04:43,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 23:23:23"
+        },
+        {
+            "id": 35,
+            "title": "\u4f60\u597d\uff0c\u9985\u997c",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/737820260107_\u4f60\u597d\uff0c\u9985\u997c.mp3",
+            "srt": "[{\"end_time\":\"00:01:39,023\",\"id\":2054,\"start_time\":\"00:01:22,141\"},{\"end_time\":\"00:02:10,023\",\"id\":2054,\"start_time\":\"00:01:52,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 23:22:54"
+        },
+        {
+            "id": 36,
+            "title": "\u547c\u565c\u547c\u565c\u7cd6\u846b\u82a6",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/688920260107_\u547c\u565c\u547c\u565c\u7cd6\u846b\u82a6.mp3",
+            "srt": "[{\"end_time\":\"00:00:41,023\",\"id\":443,\"start_time\":\"00:00:36,141\"},{\"end_time\":\"00:00:48,023\",\"id\":810,\"start_time\":\"00:00:42,141\"},{\"end_time\":\"00:00:56,023\",\"id\":824,\"start_time\":\"00:00:49,141\"},{\"end_time\":\"00:05:21,023\",\"id\":928,\"start_time\":\"00:05:09,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:41:15"
+        },
+        {
+            "id": 37,
+            "title": "\u516c\u4e3b\u7684\u70e6\u607c\u2014\u2014\u7126\u7cd6\u997c\u5e72",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/189120260107_\u516c\u4e3b\u7684\u70e6\u607c\u2014\u2014\u7126\u7cd6\u997c\u5e72.mp3",
+            "srt": "[{\"end_time\":\"00:00:29,023\",\"id\":906,\"start_time\":\"00:00:23,141\"},{\"end_time\":\"00:00:36,023\",\"id\":913,\"start_time\":\"00:00:30,141\"},{\"end_time\":\"00:05:56,023\",\"id\":1603,\"start_time\":\"00:05:47,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:40:56"
+        },
+        {
+            "id": 38,
+            "title": "\u5403\u6389\u4f60\u7684\u8c4c\u8c46",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/361220260107_\u5403\u6389\u4f60\u7684\u8c4c\u8c46.mp3",
+            "srt": "[{\"end_time\":\"00:00:48,023\",\"id\":913,\"start_time\":\"00:00:42,141\"},{\"end_time\":\"00:05:04,023\",\"id\":913,\"start_time\":\"00:04:56,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:40:23"
+        },
+        {
+            "id": 39,
+            "title": "\u7259\u9f7f\u5927\u8857\u7684\u65b0\u9c9c\u4e8b",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/990220260107_\u7259\u9f7f\u5927\u8857\u7684\u65b0\u9c9c\u4e8b.mp3",
+            "srt": "[{\"end_time\":\"00:01:38,023\",\"id\":131,\"start_time\":\"00:01:34,141\"},{\"end_time\":\"00:01:52,023\",\"id\":928,\"start_time\":\"00:01:46,141\"},{\"end_time\":\"00:03:46,023\",\"id\":131,\"start_time\":\"00:03:36,141\"},{\"end_time\":\"00:04:21,023\",\"id\":131,\"start_time\":\"00:04:15,141\"},{\"end_time\":\"00:04:52,023\",\"id\":1263,\"start_time\":\"00:04:33,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:39:36"
+        },
+        {
+            "id": 40,
+            "title": "\u6c34\u679c\u4eec\u7684\u665a\u4f1a",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/441420260107_\u6c34\u679c\u4eec\u7684\u665a\u4f1a.mp3",
+            "srt": "[{\"end_time\":\"00:00:47,023\",\"id\":1585,\"start_time\":\"00:00:36,141\"},{\"end_time\":\"00:01:04,023\",\"id\":1756,\"start_time\":\"00:00:56,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:37:51"
+        },
+        {
+            "id": 41,
+            "title": "\u725b\u6cb9\u679c\u7684\u7591\u95ee",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/981120260107_\u725b\u6cb9\u679c\u7684\u7591\u95ee.mp3",
+            "srt": "[{\"end_time\":\"00:01:54,023\",\"id\":443,\"start_time\":\"00:01:50,141\"},{\"end_time\":\"00:02:01,023\",\"id\":807,\"start_time\":\"00:01:55,141\"},{\"end_time\":\"00:02:12,023\",\"id\":819,\"start_time\":\"00:02:02,141\"},{\"end_time\":\"00:03:25,023\",\"id\":1263,\"start_time\":\"00:03:10,141\"},{\"end_time\":\"00:04:32,023\",\"id\":532,\"start_time\":\"00:04:21,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:35:48"
+        },
+        {
+            "id": 42,
+            "title": "\u597d\u60f3\u5403\u69b4\u83b2",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/322920260107_\u597d\u60f3\u5403\u69b4\u83b2.mp3",
+            "srt": "[{\"end_time\":\"00:00:42,023\",\"id\":1756,\"start_time\":\"00:00:37,141\"},{\"end_time\":\"00:01:07,023\",\"id\":1585,\"start_time\":\"00:01:00,141\"},{\"end_time\":\"00:01:28,100\",\"id\":821,\"start_time\":\"00:01:26,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:35:29"
+        },
+        {
+            "id": 43,
+            "title": "\u5927\u5634\u9e48\u9e55",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/373620260107_\u5927\u5634\u9e48\u9e55.mp3",
+            "srt": "[{\"end_time\":\"00:00:44,023\",\"id\":528,\"start_time\":\"00:00:34,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:34:55"
+        },
+        {
+            "id": 44,
+            "title": "\u81ed\u81ed\u7684\u8def\u6613",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20260107\/833720260107_\u81ed\u81ed\u7684\u8def\u6613.mp3",
+            "srt": "[{\"end_time\":\"00:00:20,023\",\"id\":1666,\"start_time\":\"00:00:12,141\"},{\"end_time\":\"00:01:03,023\",\"id\":1263,\"start_time\":\"00:00:54,141\"},{\"end_time\":\"00:02:47,023\",\"id\":1666,\"start_time\":\"00:02:31,141\"}]",
+            "year": 2026,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2026-01-07 22:34:00"
+        },
     ],
   });
 }
