@@ -576,6 +576,28 @@ export default async function handler(req, res) {
             "is_show": "1",
             "created_at": "2025-11-18 20:43:01"
         },
+        {
+            "id": 53,
+            "title": "\u5175\u9a6c\u4fd1\uff0c\u5feb\u8dd1",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20251118\/906520251118_\u5175\u9a6c\u4fd1\uff0c\u5feb\u8dd1.MP3",
+            "srt": "[{\"end_time\":\"00:04:18,023\",\"id\":824,\"start_time\":\"00:04:02,141\"}]",
+            "year": 2025,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2025-11-18 20:42:46"
+        },
+        {
+            "id": 54,
+            "title": "99\u9897\u7ea2\u8c46\u53bb\u65c5\u884c",
+            "img_url": "",
+            "video_url": "https:\/\/res.xiaobo.qiweiwangguo.com\/audios\/20251118\/128220251118_99\u9897\u7ea2\u8c46\u53bb\u65c5\u884c.MP3",
+            "srt": "[{\"end_time\":\"00:00:50,023\",\"id\":1760,\"start_time\":\"00:00:29,141\"},{\"end_time\":\"00:03:05,023\",\"id\":129,\"start_time\":\"00:02:47,141\"}]",
+            "year": 2025,
+            "type": "audio",
+            "is_show": "1",
+            "created_at": "2025-11-18 20:29:57"
+        },
     ],
   });
 }
