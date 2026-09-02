@@ -94,6 +94,11 @@ function createFallbackAnalysis(text, direction) {
   const title = fallbackTitle(text)
   const emotion = direction === 'warm' ? '温暖、柔和' : direction === 'mystery' ? '神秘、富有想象力' : '自然、清晰'
   const introduction = `这款气味从“${text.slice(0, 50)}”出发。开场由${names[0]}建立第一印象，随后${names.slice(1, -1).join('与') || names[1]}慢慢铺开空间，最后由${names[names.length - 1]}留下一点清晰的余韵。`
+  const formulaExplanation = formula.map((item) => {
+    const scent = SCENTS_BY_ID.get(item.scentId)
+    const effect = scent.keywords.slice(0, 2).join('、') || scent.category
+    return `${scent.name}作为${item.role}，负责表现${effect}`
+  }).join('；') + `。这些气味共同把“${text.slice(0, 30)}”转化为从第一印象到余韵都清晰连贯的嗅觉体验。`
   return {
     title,
     understanding: {
@@ -103,7 +108,7 @@ function createFallbackAnalysis(text, direction) {
       keywords: names.slice(0, 4)
     },
     introduction,
-    formulaExplanation: `${names.join('、')}组成由主体、连接到点缀的嗅觉层次，既保留原始场景的辨识度，也让整体闻起来更完整。`,
+    formulaExplanation,
     formula
   }
 }
@@ -135,8 +140,8 @@ async function createFormulaWithOpenAI({ text, direction }) {
         '先理解场景、情绪、空气质感和记忆线索，再选择气味；不要只做关键词机械匹配。',
         '除非用户明确要求，榴莲、消毒水、爆炸、火焰、夜店迷香等强烈气味只可谨慎点缀。',
         '所有文本使用自然、具体、有画面感的中文，不得声称治疗、提神、助眠等医学功效。',
-        'introduction 为 90 至 180 个汉字，描述第一印象、展开与余韵；它也是现场逐字朗读的唯一文案。',
-        'formulaExplanation 解释配方结构及各气味如何共同还原用户想象。',
+        'introduction 为 70 至 140 个汉字，专注描述场景、第一印象、展开与余韵，不要只写抽象故事。',
+        'formulaExplanation 为 90 至 220 个汉字，必须说明为什么选择这些气味、每种气味在配方中的作用，以及组合后如何实现用户的场景和情绪意图；原料较多时可以按主体、连接、点缀分组说明，但不能只罗列名称。',
         '每个 formula.description 都要说明该原料在这个特定场景里的作用。'
       ].join('\n'),
       input: JSON.stringify({
@@ -235,6 +240,13 @@ function toPrescription(formula) {
   }, {})
 }
 
+function createScentStory(analysis) {
+  const introduction = String(analysis && analysis.introduction || '').trim()
+  const explanation = String(analysis && analysis.formulaExplanation || '').trim()
+  if (!explanation || introduction.includes(explanation)) return introduction
+  return `${introduction}\n\n为什么这样选：${explanation.replace(/^为什么这样选[：:]?/, '')}`
+}
+
 export default async function handler(req, res) {
   setCorsHeaders(res)
 
@@ -273,14 +285,16 @@ export default async function handler(req, res) {
     enrichment = 'fallback'
   }
 
+  const scentStory = createScentStory(analysis)
+
   res.status(200).json({
     code: 200,
     data: {
       title: analysis.title || fallbackTitle(text),
       understanding: analysis.understanding,
-      introduction: analysis.introduction,
+      introduction: scentStory,
       formulaExplanation: analysis.formulaExplanation,
-      audioText: analysis.introduction,
+      audioText: scentStory,
       formula,
       prescription: toPrescription(formula),
       audio: '',
