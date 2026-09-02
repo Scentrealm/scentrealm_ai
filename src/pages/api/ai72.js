@@ -93,6 +93,7 @@ function createFallbackAnalysis(text, direction) {
   const names = formula.map((item) => SCENTS_BY_ID.get(item.scentId).name)
   const title = fallbackTitle(text)
   const emotion = direction === 'warm' ? '温暖、柔和' : direction === 'mystery' ? '神秘、富有想象力' : '自然、清晰'
+  const introduction = `这款气味从“${text.slice(0, 50)}”出发。开场由${names[0]}建立第一印象，随后${names.slice(1, -1).join('与') || names[1]}慢慢铺开空间，最后由${names[names.length - 1]}留下一点清晰的余韵。`
   return {
     title,
     understanding: {
@@ -101,9 +102,8 @@ function createFallbackAnalysis(text, direction) {
       sensory: `用${names.join('、')}把空气、光线与情绪连接起来`,
       keywords: names.slice(0, 4)
     },
-    introduction: `这款气味从“${text.slice(0, 50)}”出发。开场由${names[0]}建立第一印象，随后${names.slice(1, -1).join('与') || names[1]}慢慢铺开空间，最后由${names[names.length - 1]}留下一点清晰的余韵。`,
+    introduction,
     formulaExplanation: `${names.join('、')}组成由主体、连接到点缀的嗅觉层次，既保留原始场景的辨识度，也让整体闻起来更完整。`,
-    audioText: `你的气味作品叫做${title}。它从${names[0]}开始，${names.slice(1).join('、')}依次展开，把你描述的场景变成一段有前后层次的嗅觉体验。`,
     formula
   }
 }
@@ -135,10 +135,9 @@ async function createFormulaWithOpenAI({ text, direction }) {
         '先理解场景、情绪、空气质感和记忆线索，再选择气味；不要只做关键词机械匹配。',
         '除非用户明确要求，榴莲、消毒水、爆炸、火焰、夜店迷香等强烈气味只可谨慎点缀。',
         '所有文本使用自然、具体、有画面感的中文，不得声称治疗、提神、助眠等医学功效。',
-        'introduction 为 90 至 180 个汉字，描述第一印象、展开与余韵。',
+        'introduction 为 90 至 180 个汉字，描述第一印象、展开与余韵；它也是现场逐字朗读的唯一文案。',
         'formulaExplanation 解释配方结构及各气味如何共同还原用户想象。',
-        '每个 formula.description 都要说明该原料在这个特定场景里的作用。',
-        'audioText 为 70 至 140 个汉字，适合展会现场直接朗读，不要念比例和编号。'
+        '每个 formula.description 都要说明该原料在这个特定场景里的作用。'
       ].join('\n'),
       input: JSON.stringify({
         userText: text,
@@ -168,7 +167,6 @@ async function createFormulaWithOpenAI({ text, direction }) {
               },
               introduction: { type: 'string' },
               formulaExplanation: { type: 'string' },
-              audioText: { type: 'string' },
               formula: {
                 type: 'array',
                 minItems: 3,
@@ -186,7 +184,7 @@ async function createFormulaWithOpenAI({ text, direction }) {
                 }
               }
             },
-            required: ['title', 'understanding', 'introduction', 'formulaExplanation', 'audioText', 'formula']
+            required: ['title', 'understanding', 'introduction', 'formulaExplanation', 'formula']
           }
         }
       }
@@ -282,7 +280,7 @@ export default async function handler(req, res) {
       understanding: analysis.understanding,
       introduction: analysis.introduction,
       formulaExplanation: analysis.formulaExplanation,
-      audioText: analysis.audioText || analysis.introduction,
+      audioText: analysis.introduction,
       formula,
       prescription: toPrescription(formula),
       audio: '',
