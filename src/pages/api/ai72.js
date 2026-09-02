@@ -94,7 +94,7 @@ function createFallbackAnalysis(text, direction) {
   const title = fallbackTitle(text)
   const emotion = direction === 'warm' ? '温暖、柔和' : direction === 'mystery' ? '神秘、富有想象力' : '自然、清晰'
   const introduction = `这款气味从“${text.slice(0, 50)}”出发。开场由${names[0]}建立第一印象，随后${names.slice(1, -1).join('与') || names[1]}慢慢铺开空间，最后由${names[names.length - 1]}留下一点清晰的余韵。`
-  const formulaExplanation = formula.map((item) => {
+  const formulaExplanation = '这个配方中，' + formula.map((item) => {
     const scent = SCENTS_BY_ID.get(item.scentId)
     const effect = scent.keywords.slice(0, 2).join('、') || scent.category
     return `${scent.name}作为${item.role}，负责表现${effect}`
@@ -141,7 +141,7 @@ async function createFormulaWithOpenAI({ text, direction }) {
         '除非用户明确要求，榴莲、消毒水、爆炸、火焰、夜店迷香等强烈气味只可谨慎点缀。',
         '所有文本使用自然、具体、有画面感的中文，不得声称治疗、提神、助眠等医学功效。',
         'introduction 为 70 至 140 个汉字，专注描述场景、第一印象、展开与余韵，不要只写抽象故事。',
-        'formulaExplanation 为 90 至 220 个汉字，必须说明为什么选择这些气味、每种气味在配方中的作用，以及组合后如何实现用户的场景和情绪意图；原料较多时可以按主体、连接、点缀分组说明，但不能只罗列名称。',
+        'formulaExplanation 为 90 至 220 个汉字，是最终展示和朗读的唯一 Scent Story；必须以“这个配方”自然开头，直接说明为什么选择这些气味、每种气味在配方中的作用，以及组合后如何实现用户的场景和情绪意图；不要添加“为什么这样选”等标题，原料较多时可以按主体、连接、点缀分组说明，但不能只罗列名称。',
         '每个 formula.description 都要说明该原料在这个特定场景里的作用。'
       ].join('\n'),
       input: JSON.stringify({
@@ -241,10 +241,8 @@ function toPrescription(formula) {
 }
 
 function createScentStory(analysis) {
-  const introduction = String(analysis && analysis.introduction || '').trim()
   const explanation = String(analysis && analysis.formulaExplanation || '').trim()
-  if (!explanation || introduction.includes(explanation)) return introduction
-  return `${introduction}\n\n为什么这样选：${explanation.replace(/^为什么这样选[：:]?/, '')}`
+  return explanation.replace(/^为什么(?:这样|这么)选[：:]?\s*/, '')
 }
 
 export default async function handler(req, res) {
