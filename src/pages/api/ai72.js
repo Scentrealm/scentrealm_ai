@@ -130,8 +130,8 @@ async function createFormulaWithOpenAI({ text, direction }) {
       store: false,
       instructions: [
         '你是气味王国的资深嗅觉体验设计师，要把观众的一句话转化为可展示的气味配方。',
-        '只能从提供的气味目录中选 3 至 6 种，不得发明目录外的气味或 scentId。',
-        '配方比例合计必须为 100，每个比例为 5 至 60 的整数。',
+        '只能从提供的气味目录中选择原料，不得发明目录外的气味或 scentId；配方最多 10 种，具体数量由场景复杂度决定，不要为了凑数量堆叠原料。',
+        '配方比例合计必须为 100，每个比例为 1 至 100 的整数。',
         '先理解场景、情绪、空气质感和记忆线索，再选择气味；不要只做关键词机械匹配。',
         '除非用户明确要求，榴莲、消毒水、爆炸、火焰、夜店迷香等强烈气味只可谨慎点缀。',
         '所有文本使用自然、具体、有画面感的中文，不得声称治疗、提神、助眠等医学功效。',
@@ -169,14 +169,14 @@ async function createFormulaWithOpenAI({ text, direction }) {
               formulaExplanation: { type: 'string' },
               formula: {
                 type: 'array',
-                minItems: 3,
-                maxItems: 6,
+                minItems: 1,
+                maxItems: 10,
                 items: {
                   type: 'object',
                   additionalProperties: false,
                   properties: {
                     scentId: { type: 'integer', enum: AI72_SCENTS.map((item) => item.id) },
-                    ratio: { type: 'integer', minimum: 5, maximum: 60 },
+                    ratio: { type: 'integer', minimum: 1, maximum: 100 },
                     role: { type: 'string', enum: ['主体', '连接', '点缀'] },
                     description: { type: 'string' }
                   },
@@ -211,7 +211,7 @@ function normalizeFormula(rawFormula) {
       description: String(item.description || `${scent.name}构成配方中的一层气味。`).slice(0, 160)
     })
   }
-  if (unique.length < 3) return []
+  if (!unique.length) return []
 
   const total = unique.reduce((sum, item) => sum + item.sourceRatio, 0)
   const normalizedRatios = unique.map((item) => Math.round((item.sourceRatio / total) * 100))
