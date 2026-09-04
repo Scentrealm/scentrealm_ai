@@ -1,10 +1,12 @@
 const AI72_SCENTS = require('../../data/ai72-scents')
+const { getSharedCreation, saveCreation, saveFeedback } = require('../../lib/ai72-db')
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/responses'
 const OPENAI_MODEL = process.env.AI72_OPENAI_MODEL || 'gpt-4o-mini'
 const OPENAI_TIMEOUT_MS = 25000
 
 const SCENTS_BY_ID = new Map(AI72_SCENTS.map((item) => [Number(item.id), item]))
+const ALLOWED_FEEDBACK = new Set(['很像', '有点意外', '想调整'])
 
 export const config = {
   maxDuration: 45
@@ -252,14 +254,60 @@ export default async function handler(req, res) {
     res.status(204).end()
     return
   }
+
+  if (req.method === 'GET') {
+    const shareCode = String(req.query && (req.query.share || req.query.shareCode) || '').trim()
+    if (!/^[a-f0-9]{18}$/.test(shareCode)) {
+      res.status(400).json({ code: 400, message: '分享编号无效。' })
+      return
+    }
+    try {
+      const creation = await getSharedCreation(shareCode)
+      if (!creation) {
+        res.status(404).json({ code: 404, message: '没有找到这个气味作品。' })
+        return
+      }
+      res.status(200).json({ code: 200, data: creation })
+    } catch (error) {
+      console.error('[ai72] load shared creation failed:', error.message)
+      res.status(503).json({ code: 503, message: '气味作品暂时无法打开，请稍后重试。' })
+    }
+    return
+  }
+
   if (req.method !== 'POST') {
-    res.status(405).json({ code: 405, message: '请使用 POST 方法。' })
+    res.status(405).json({ code: 405, message: '请使用 GET 或 POST 方法。' })
+    return
+  }
+
+  const action = String(req.body && req.body.action || '').trim()
+  if (action === 'feedback') {
+    const shareCode = String(req.body && req.body.shareCode || '').trim()
+    const clientId = String(req.body && req.body.clientId || '').trim().slice(0, 64)
+    const feedback = String(req.body && req.body.feedback || '').trim()
+    if (!/^[a-f0-9]{18}$/.test(shareCode) || !clientId || !ALLOWED_FEEDBACK.has(feedback)) {
+      res.status(400).json({ code: 400, message: '反馈参数无效。' })
+      return
+    }
+    try {
+      const saved = await saveFeedback({ shareCode, clientId, feedback })
+      if (!saved) {
+        res.status(404).json({ code: 404, message: '没有找到这个气味作品。' })
+        return
+      }
+      res.status(200).json({ code: 200, data: { saved: true } })
+    } catch (error) {
+      console.error('[ai72] save feedback failed:', error.message)
+      res.status(503).json({ code: 503, message: '反馈暂时无法保存，请稍后重试。' })
+    }
     return
   }
 
   const text = String(req.body && req.body.text || '').trim().slice(0, 200)
   const requestedDirection = String(req.body && req.body.direction || 'natural').trim()
   const direction = ['natural', 'warm', 'mystery'].includes(requestedDirection) ? requestedDirection : 'natural'
+  const clientId = String(req.body && req.body.clientId || '').trim().slice(0, 64)
+  const deviceMac = String(req.body && req.body.mac || '').trim().slice(0, 32)
 
   if (!text) {
     res.status(400).json({ code: 400, message: 'text 不能为空。' })
@@ -284,21 +332,50 @@ export default async function handler(req, res) {
   }
 
   const scentStory = createScentStory(analysis)
+  const title = analysis.title || fallbackTitle(text)
+  const prescription = toPrescription(formula)
+  let recordId = null
+  let shareCode = null
+  let persistence = 'saved'
+
+  try {
+    const record = await saveCreation({
+      clientId,
+      deviceMac,
+      userInput: text,
+      direction,
+      title,
+      scentStory,
+      formula,
+      prescription,
+      understanding: analysis.understanding,
+      model: enrichment === 'openai' ? OPENAI_MODEL : 'fallback',
+      generationSource: enrichment
+    })
+    recordId = record.recordId
+    shareCode = record.shareCode
+  } catch (error) {
+    persistence = 'unavailable'
+    console.error('[ai72] save creation failed:', error.message)
+  }
 
   res.status(200).json({
     code: 200,
     data: {
-      title: analysis.title || fallbackTitle(text),
+      recordId,
+      shareCode,
+      title,
       understanding: analysis.understanding,
       introduction: scentStory,
       formulaExplanation: analysis.formulaExplanation,
       audioText: scentStory,
       formula,
-      prescription: toPrescription(formula),
+      prescription,
       audio: '',
       released: false,
       previewOnly: true,
-      enrichment
+      enrichment,
+      persistence
     }
   })
 }
